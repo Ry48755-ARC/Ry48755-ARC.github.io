@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ARC // Ry48755-ARC Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #202840 0, #050814 55%, #02040a 100%);
+      color: #e5f6ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .shell {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 12px;
+      background: rgba(5, 9, 20, 0.95);
+      border: 1px solid #272f4a;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+    .shell-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: linear-gradient(to right, #0c1224, #050918);
+      border-bottom: 1px solid #272f4a;
+      font-size: 13px;
+      color: #b4c3ff;
+    }
+    .shell-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #333b5a;
+    }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+
+    .shell-title {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #d6e0ff;
+    }
+
+    .shell-body {
+      padding: 16px 14px 18px;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.4;
+      color: #c8f5ff;
+      min-height: 260px;
+    }
+
+    #console {
+      white-space: pre-wrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.05em;
+      background: #8ef0ff;
+      margin-left: 2px;
+      animation: blink 0.9s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    .hint {
+      margin-top: 16px;
+      font-size: 11px;
+      color: #7fb7ff;
+      opacity: 0.8;
+    }
+
+    /* 메인 UI */
+    #main-ui {
+      display: none;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ui-header {
+      margin-bottom: 12px;
+    }
+    .ui-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #e3f3ff;
+    }
+    .ui-sub {
+      font-size: 12px;
+      color: #94a4d8;
+      margin-top: 4px;
+    }
+
+    .ui-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .ui-card {
+      background: rgba(13, 19, 40, 0.98);
+      border-radius: 10px;
+      padding: 10px 11px 11px;
+      border: 1px solid #283352;
+      cursor: pointer;
+      transition: border-color 0.15s ease-out, transform 0.12s ease-out, background 0.15s;
+    }
+    .ui-card:hover {
+      border-color: #48e0d4;
+      transform: translateY(-1px);
+      background: rgba(18, 26, 56, 1);
+    }
+    .ui-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #f1fbff;
+    }
+    .ui-card-tag {
+      font-size: 11px;
+      color: #74ffe6;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .ui-card-desc {
+      font-size: 11px;
+      color: #a9b6e3;
+    }
+
+    .ui-footer {
+      margin-top: 12px;
+      font-size: 10px;
+      color: #5f6da0;
+    }
+
+    @media (max-width: 480px) {
+      .shell-body {
+        font-size: 12px;
+        padding: 14px 10px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="shell-header">
+      <div class="shell-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <div class="shell-title">ARC TERMINAL — RY48755-ARC</div>
+      <div style="font-size:11px; color:#7f8ac6;">v0.1</div>
+    </div>
+    <div class="shell-body">
+      <!-- 부팅 콘솔 -->
+      <div id="console"></div>
+
+      <!-- 메인 UI -->
+      <div id="main-ui">
+        <div class="ui-header">
+          <div class="ui-title">ARC // WORLD ARCHIVE</div>
+          <div class="ui-sub">
+            Personal archive managed by Ry48755. Browse worlds, characters, and system notes.
+          </div>
+        </div>
+
+        <div class="ui-grid">
+          <div class="ui-card" onclick="alert('나중에 세계관 목록 섹션으로 연결하기!')">
+            <div class="ui-card-tag">MODULE // WORLDS</div>
+            <div class="ui-card-title">World Archives</div>
+            <div class="ui-card-desc">
+              Records of created universes and settings. (어비스, 청해연 등 나중에 여기로 연결)
+            </div>
+          </div>
+
+          <div class="ui-card" onclick="alert('나중에 캐릭터 인덱스로 연결하기!')">
+            <div class="ui-card-tag">MODULE // ENTITIES</div>
+            <div class="ui-card-title">Character Index</div>
+            <div class="ui-card-desc">
+              Key entities, managers, gatekeepers and other beings listed by world.
+            </div>
+          </div>
+
+          <div class="ui-card" onclick="alert('나중에 로그/메모 페이지로 연결하기!')">
+            <div class="ui-card-tag">MODULE // LOGS</div>
+            <div class="ui-card-title">System Notes</div>
+            <div class="ui-card-desc">
+              Development logs, scraps, drafts, and experimental records.
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-footer">
+          Tip: 이 카드는 임시 자리 표시자야. 나중에 실제 페이지(세계관별 HTML이나 섹션)로 링크만 바꾸면 됨.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 부팅 로그 텍스트들
+    const lines = [
+      ">> ARC_BOOT_SEQUENCE_INITIALIZED",
+      ">> Loading core modules..................OK",
+      ">> Syncing deep-archive channels........OK",
+      ">> Visitor signal detected",
+      ">> Identity: user",
+      ">> Establishing session..................OK",
+      ">> Welcome to ARC. Press ENTER or tap to continue."
+    ];
+
+    const consoleEl = document.getElementById("console");
+    const mainUI = document.getElementById("main-ui");
+
+    let index = 0;
+
+    function printNextLine() {
+      if (index < lines.length) {
+        const line = document.createElement("div");
+        line.textContent = lines[index];
+        consoleEl.appendChild(line);
+        index++;
+      } else {
+        // 커서 표시
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        consoleEl.appendChild(document.createTextNode("\n"));
+        consoleEl.appendChild(cursor);
+        // 일정 시간 뒤 자동으로 메인 UI로 전환
+        setTimeout(showMainUI, 2600);
+      }
+    }
+
+    function showMainUI() {
+      consoleEl.style.display = "none";
+      mainUI.style.display = "block";
+    }
+
+    // 일정 간격으로 한 줄씩 출력
+    let bootTimer = setInterval(printNextLine, 540);
+    // 너무 오래 걸리면 강제 종료 방지
+    setTimeout(() => clearInterval(bootTimer), 12000);
+
+    // 키보드/터치로도 바로 넘어갈 수 있게
+    function skipToMain() {
+      if (mainUI.style.display === "block") return;
+      clearInterval(bootTimer);
+      mainUI.style.display = "block";
+      consoleEl.style.display = "none";
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        skipToMain();
+      }
+    });
+
+    document.addEventListener("click", () => {
+      // 모바일 터치도 처리
+      skipToMain();
+    }, { passive: true });
+  </script>
+</body>
+</html>
