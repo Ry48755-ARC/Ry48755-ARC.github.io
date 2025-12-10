@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ARC // The 48755</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #202840 0, #050814 55%, #02040a 100%);
+      color: #e5f6ff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+    }
+
+    .header {
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #2c3554;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #9db1ff;
+      margin-top: 4px;
+    }
+
+    .world-block {
+      margin-top: 16px;
+      padding: 14px 14px 12px;
+      border-radius: 10px;
+      background: rgba(10, 16, 36, 0.96);
+      border: 1px solid #2c3554;
+    }
+
+    .world-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .world-tagline {
+      font-size: 13px;
+      color: #a9c1ff;
+      margin-bottom: 10px;
+    }
+
+    .world-desc {
+      font-size: 12px;
+      color: #c7d6ff;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .world-dm {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(4, 10, 30, 0.9);
+      border: 1px solid #334069;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      color: #8fe9ff;
+      white-space: pre-wrap;
+    }
+
+    .section-title {
+      margin-top: 20px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #a5b3ff;
+    }
+
+    .grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(13, 19, 40, 0.96);
+      border: 1px solid #2d3a5a;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.15s ease-out;
+    }
+
+    .card:hover {
+      border-color: #48e0d4;
+      transform: translateY(-2px);
+      background: rgba(18, 26, 56, 1);
+    }
+
+    .char-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .char-name span {
+      font-size: 12px;
+      color: #9fb2ff;
+      margin-left: 4px;
+    }
+
+    .char-role {
+      font-size: 11px;
+      color: #74ffe6;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .char-desc {
+      font-size: 12px;
+      color: #c2d1ff;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: #6170a8;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .back-row {
+      margin-top: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .back-link {
+      color: #8eb5ff;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .back-link:hover {
+      color: #c3ddff;
+    }
+
+    .status-bar {
+      margin-top: 10px;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      color: #7fe3ff;
+      min-height: 1.4em;
+    }
+
+    .status-fade {
+      animation: fadeOut 1.6s ease-out forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      60% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .world-name {
+        font-size: 17px;
+      }
+      .title {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- 헤더 -->
+    <div class="header">
+      <div class="title">ARC // WORLD DETAIL NODE</div>
+      <div class="subtitle">World ID: 48755</div>
+    </div>
+
+    <!-- 세계관 블록 -->
+    <div class="world-block">
+      <div class="world-name">The 48755</div>
+      <div class="world-tagline">Hello, visitor. Welcome to 48755.</div>
+
+      <div class="world-desc">
+        48755 is the place where the evils are punished, but also a place for many visitors to rest.
+        48755 is managed by RyuAn, the main administrator, and 4 sub-admins (Lumi, Proto, Cubo, Surge).
+      </div>
+
+      <div class="world-dm">
+&gt;&gt;direct_message_from:[Ryu4N]
+&gt;&gt;We promise that we will do our best to ensure that you enjoy viewing the worlds I created. Welcome again.
+      </div>
+    </div>
+
+    <!-- 캐릭터 섹션 -->
+    <div class="section-title">ADMINISTRATORS & SUB-ADMINS</div>
+
+    <div class="grid">
+
+      <!-- RyuAn -->
+      <div class="card" onclick="openProfile('characters/ryuan.html','RyuAn')">
+        <div class="char-name">RyuAn<span>/ 류안</span></div>
+        <div class="char-role">Main-Admin // manages creatures and systems of 48755</div>
+        <div class="char-desc">‘….Hello again. Have a nice day.’</div>
+      </div>
+
+      <!-- Lumi -->
+      <div class="card" onclick="openProfile('characters/lumi.html','Lumi')">
+        <div class="char-name">Lumi<span>/ 루미</span></div>
+        <div class="char-role">Sub-Admin // Light &amp; Mist</div>
+        <div class="char-desc">‘Tell me if you can’t see clearly!’</div>
+      </div>
+
+      <!-- Proto -->
+      <div class="card" onclick="openProfile('characters/proto.html','Proto')">
+        <div class="char-name">Proto<span>/ 프로토</span></div>
+        <div class="char-role">Sub-Admin // Security &amp; Access</div>
+        <div class="char-desc">‘You’d better act polite to the administrator.’</div>
+      </div>
+
+      <!-- Cubo -->
+      <div class="card" onclick="openProfile('characters/cubo.html','Cubo')">
+        <div class="char-name">Cubo<span>/ 큐보</span></div>
+        <div class="char-role">Sub-Admin // Environment &amp; Support</div>
+        <div class="char-desc">‘Ooh hey wait a new guy here??’</div>
+      </div>
+
+      <!-- Surge -->
+      <div class="card" onclick="openProfile('characters/surge.html','Surge')">
+        <div class="char-name">Surge<span>/ 서지</span></div>
+        <div class="char-role">Sub-Admin // Recovery &amp; Treatment</div>
+        <div class="char-desc">‘Are you hurt now? Let me see your injuries.’</div>
+      </div>
+
+    </div>
+
+    <!-- 상태바 + 푸터 -->
+    <div class="status-bar" id="status-bar"></div>
+
+    <div class="footer">
+      ARC SYSTEM // NODE 48755 OVERVIEW v0.1
+      <div class="back-row">
+        <span class="back-link" onclick="location.href='../worlds.html'">← Back to World Index</span>
+        <span class="back-link" onclick="location.href='../index.html'">← Return to Main System</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const statusBar = document.getElementById('status-bar');
+
+    function openProfile(path, name) {
+      // 상태 메시지 출력
+      const msg = ">> Opening profile: " + name + "...";
+      statusBar.textContent = msg;
+      statusBar.classList.remove('status-fade');
+      // DOM 강제 리플로우로 애니메이션 리셋
+      void statusBar.offsetWidth;
+      statusBar.classList.add('status-fade');
+
+      // 잠깐 보여준 뒤 실제 이동
+      setTimeout(() => {
+        window.location.href = "../" + path;
+      }, 550);
+    }
+  </script>
+</body>
+</html>
