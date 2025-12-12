@@ -1,12 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Surge // Profile</title>
+  <meta charset="UTF-8" />
+  <title>ARC // Node Surge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #202840 0, #050814 55%, #02040a 100%);
+      color: #e5f6ff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel {
+      background: rgba(10, 16, 36, 0.96);
+      border-radius: 12px;
+      border: 1px solid #2c3554;
+      padding: 18px 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ───── Header ───── */
+
+    .header-title {
+      font-size: 18px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #a9b9ff;
+      margin-bottom: 4px;
+    }
+
+    .header-sub {
+      font-size: 11px;
+      color: #7d8ed7;
+    }
+
+    /* ───── Profile Panel ───── */
+
+    .profile-header {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 30% 0, #55ffe1, #111a40 55%, #050814 85%);
+      border: 1px solid #4bffe0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .name-block {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .name-main {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .name-sub {
+      font-size: 13px;
+      color: #9fb2ff;
+      margin-top: 2px;
+    }
+
+    .name-tag {
+      margin-top: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #74ffe6;
+    }
+
+    .status-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 10px;
+    }
+
+    .chip {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #35517b;
+      background: rgba(4, 16, 40, 0.9);
+      color: #bcd2ff;
+    }
+
+    .chip-crit {
+      border-color: #48e0d4;
+      color: #7ff7ea;
+    }
+
+    .quote {
+      font-size: 12px;
+      color: #d0ddff;
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #a5b3ff;
+      margin-bottom: 6px;
+    }
+
+    .sys-table {
+      font-size: 11px;
+      border-radius: 8px;
+      border: 1px solid #28345a;
+      background: rgba(7, 14, 32, 0.95);
+      padding: 8px 10px;
+    }
+
+    .sys-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .sys-label {
+      color: #7f8fcb;
+      min-width: 95px;
+    }
+
+    .sys-value {
+      color: #d4e2ff;
+      text-align: right;
+    }
+
+    .relations {
+      font-size: 11px;
+      border-radius: 8px;
+      border: 1px solid #28345a;
+      background: rgba(7, 14, 32, 0.95);
+      padding: 8px 10px;
+      line-height: 1.5;
+    }
+
+    .relations b {
+      color: #cbd8ff;
+    }
+
+    .relations span {
+      color: #8fbfff;
+    }
+
+    .note-block {
+      margin-top: 10px;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      background: rgba(2, 8, 24, 0.95);
+      border-radius: 8px;
+      border: 1px solid #32406a;
+      padding: 8px 10px;
+      color: #8fe9ff;
+      white-space: pre-wrap;
+    }
+
+    /* ───── Gallery ───── */
+
+    .gallery {
+      margin-top: 14px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .gallery-item {
+      border-radius: 10px;
+      border: 1px solid #2e3b61;
+      background: radial-gradient(circle at top, #18213f, #050814);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-caption {
+      padding: 6px 8px;
+      font-size: 11px;
+      color: #c2d1ff;
+      border-top: 1px solid #2e3b61;
+    }
+
+    /* ───── Footer ───── */
+
+    .footer {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #6f7db3;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-link {
+      color: #8eb5ff;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: #c3ddff;
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .avatar {
+        width: 84px;
+        height: 84px;
+      }
+    }
+  </style>
 </head>
-<body style="background:#050814; color:#e5f6ff; font-family:system-ui; text-align:center; padding-top:40px;">
-  <h1>Surge / 서지</h1>
-  <p>temp</p>
-  <p><a href="../worlds/48755.html" style="color:#8eb5ff;">← Back to 48755</a></p>
+
+<body>
+  <div class="container">
+
+    <!-- 공통 헤더 -->
+    <div class="panel">
+      <div class="header-title">ARC // NODE DETAIL</div>
+      <div class="header-sub">Accessing: Sub-Admin [Surge]</div>
+    </div>
+
+    <!-- 프로필 패널 -->
+    <div class="panel">
+      <div class="profile-header">
+        <div class="avatar">
+          <img src="surge_profile.png" alt="Surge profile" onerror="this.style.display='none'" />
+        </div>
+
+        <div class="name-block">
+          <div class="name-main">Surge / 서지</div>
+          <div class="name-sub">Sub-Admin // Recovery &amp; Treatment</div>
+          <div class="name-tag">MEDICAL SUPPORT &middot; EMERGENCY RESPONSE</div>
+
+          <div class="status-chips">
+            <div class="chip chip-crit">NODE ID: SURGE-0404</div>
+            <div class="chip">REALM: 48755 (Abyss)</div>
+            <div class="chip">STATUS: ACTIVE</div>
+          </div>
+
+          <div class="quote">‘Are you hurt now? Let me see your injuries.’</div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- 시스템 데이터 -->
+        <div>
+          <div class="section-title">SYSTEM DATA</div>
+          <div class="sys-table">
+            <div class="sys-row">
+              <div class="sys-label">Category</div>
+              <div class="sys-value">Sub-Administrator</div>
+            </div>
+            <div class="sys-row">
+              <div class="sys-label">Realm</div>
+              <div class="sys-value">The 48755 (Abyss)</div>
+            </div>
+            <div class="sys-row">
+              <div class="sys-label">Authority Rank</div>
+              <div class="sys-value">B-3 (Recovery)</div>
+            </div>
+            <div class="sys-row">
+              <div class="sys-label">Assigned Area</div>
+              <div class="sys-value">Residents, admins, and emergency stations</div>
+            </div>
+            <div class="sys-row">
+              <div class="sys-label">Primary Role</div>
+              <div class="sys-value">Treatment, stabilization, and long-term recovery</div>
+            </div>
+            <div class="sys-row">
+              <div class="sys-label">Behavior</div>
+              <div class="sys-value">Gentle, warm, kind-hearted</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 관계도 -->
+        <div>
+          <div class="section-title">RELATION NETWORK</div>
+          <div class="relations">
+            <p>
+              <b>RyuAn</b> <span>// Main-Admin</span><br />
+              가끔 다쳐서 오면 제일 먼저 절 살펴주는 이입니다. 매번 고맙게 생각하고 있어요.
+            </p>
+
+            <p>
+              <b>Lumi</b> <span>// Light &amp; Mist</span><br />
+              가끔 치료할 때 저한테 빛을 비춰달라고 부탁하곤 해요. 그 덕에 더 일하기 쉽다고 하더라고요.
+            </p>
+
+            <p>
+              <b>Proto</b> <span>// Security &amp; Access</span><br />
+              스트레스 받을 때마다 들러서 상담하곤 한다. 좋은 동료지....솔직히 좀 호감이다.
+            </p>
+
+            <p>
+              <b>Cubo</b> <span>// Environment &amp; Support</span><br />
+              서지는 내가 맨날 괜찮다는데도 자꾸 다쳤냐고 걱정해줘....나 진짜 괜찮은데!!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 서지 시점 로그 -->
+      <div class="note-block">
+&gt;&gt;medical_note:[Surge]
+&gt;&gt;In 48755, pain is common. Recovery should be, too.
+&gt;&gt;If you are a guest, you will be treated kindly—no exceptions.
+      </div>
+
+      <!-- 갤러리 -->
+      <div class="gallery">
+        <div class="section-title">VISUAL DATA</div>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="surge_profile.png" alt="Surge profile image" onerror="this.style.display='none'" />
+            <div class="gallery-caption">Primary profile image of Surge.</div>
+          </div>
+
+          <div class="gallery-item">
+            <img src="surge_concept.png" alt="Surge concept art" onerror="this.style.display='none'" />
+            <div class="gallery-caption">Concept art showing Surge’s mask and medical tools.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 푸터 -->
+      <div class="footer">
+        ARC SYSTEM // NODE VIEWER v0.1
+        <div class="nav-row">
+          <a class="nav-link" href="../worlds/48755.html">← Back to 48755 Index</a>
+          <a class="nav-link" href="../worlds.html">← Back to World Archives</a>
+          <a class="nav-link" href="../index.html">← Return to Main System</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
