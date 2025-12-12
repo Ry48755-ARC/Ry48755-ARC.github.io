@@ -88,6 +88,14 @@
       color: #a5b3ff;
     }
 
+    /* (추가) 섹션 설명 */
+    .section-desc {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #c2d1ff;
+      line-height: 1.45;
+    }
+
     .grid {
       margin-top: 10px;
       display: grid;
@@ -133,6 +141,90 @@
     .char-desc {
       font-size: 12px;
       color: #c2d1ff;
+    }
+
+    /* ─────────────────────────────
+       (추가) LIFEFORMS UI
+    ───────────────────────────── */
+
+    .life-tag {
+      font-size: 11px;
+      color: #74ffe6;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .life-title {
+      font-size: 15px;
+      font-weight: 650;
+      margin-bottom: 6px;
+    }
+
+    .life-desc {
+      font-size: 12px;
+      color: #b8c7ff;
+      line-height: 1.35;
+    }
+
+    .subgrid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(8, 12, 28, 0.55);
+      border: 1px solid #2a355c;
+    }
+
+    .subgrid-title {
+      grid-column: 1 / -1;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      color: #7fe3ff;
+      opacity: 0.95;
+      margin-bottom: 2px;
+      white-space: pre-wrap;
+    }
+
+    .subcard {
+      background: rgba(10, 16, 36, 0.92);
+      border: 1px solid #2d3a5a;
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      transition: 0.15s ease-out;
+    }
+
+    .subcard:hover {
+      border-color: #48e0d4;
+      transform: translateY(-2px);
+      background: rgba(18, 26, 56, 1);
+    }
+
+    .sub-name {
+      font-size: 14px;
+      font-weight: 650;
+      margin-bottom: 6px;
+    }
+
+    .sub-meta {
+      font-size: 11px;
+      color: #74ffe6;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .sub-desc {
+      font-size: 12px;
+      color: #c2d1ff;
+      line-height: 1.35;
+    }
+
+    .hidden {
+      display: none;
     }
 
     .footer {
@@ -258,11 +350,106 @@
 
     </div>
 
+    <!-- ─────────────────────────────
+         (추가) 생물종 섹션
+    ───────────────────────────── -->
+
+    <div class="section-title">ABYSS LIFEFORMS DATABASE</div>
+    <div class="section-desc">
+      Biological entities inhabiting The 48755.<br />
+      Classified by origin and transformation process.
+    </div>
+
+    <!-- 상위 분류 카드 2개 -->
+    <div class="grid">
+
+      <!-- Abyss Native Life -->
+      <div class="card" onclick="toggleLife('native','ABYSS_NATIVE_LIFE')">
+        <div class="life-tag">CATEGORY // NATIVE</div>
+        <div class="life-title">Abyss Native Life</div>
+        <div class="life-desc">
+          Lifeforms originated within the Abyss itself.<br />
+          Species-based classification.
+        </div>
+      </div>
+
+      <!-- Abyss-Corrupted Entities -->
+      <div class="card" onclick="toggleLife('corrupted','ABYSS_CORRUPTED_ENTITIES')">
+        <div class="life-tag">CATEGORY // CORRUPTED</div>
+        <div class="life-title">Abyss-Corrupted Entities</div>
+        <div class="life-desc">
+          Results of abyssal transformation of evils/sentient beings.<br />
+          Case-based classification.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 펼쳐지는 하위 카드 영역: Native -->
+    <div id="native" class="subgrid hidden">
+      <div class="subgrid-title">
+&gt;&gt; LIFEFORM_CATEGORY_OPENED: ABYSS_NATIVE_LIFE
+&gt;&gt; Rendering species cards...
+      </div>
+
+      <!-- 예시 카드들-->
+      <div class="subcard" onclick="openLifeform('lifeforms/native_mark.html','Mark')">
+        <div class="sub-name">MarC</div>
+        <div class="sub-meta">NATIVE SPECIES</div>
+        <div class="sub-desc">Teleporter cliones</div>
+      </div>
+
+      <div class="subcard" onclick="openLifeform('lifeforms/native_garan.html','Garan')">
+        <div class="sub-name">Gahran</div>
+        <div class="sub-meta">NATIVE SPECIES</div>
+        <div class="sub-desc">Giant defensive rays</div>
+      </div>
+
+      <div class="subcard" onclick="openLifeform('lifeforms/native_arka.html','Arka')">
+        <div class="sub-name">Arca</div>
+        <div class="sub-meta">NATIVE SPECIES</div>
+        <div class="sub-desc">Like a torpedo</div>
+      </div>
+
+      <div class="subcard" onclick="openLifeform('lifeforms/native_nanu.html','Nanu')">
+        <div class="sub-name">Nanu</div>
+        <div class="sub-meta">NATIVE SPECIES</div>
+        <div class="sub-desc">Sweethearts</div>
+      </div>
+    </div>
+
+    <!-- 펼쳐지는 하위 카드 영역: Corrupted -->
+    <div id="corrupted" class="subgrid hidden">
+      <div class="subgrid-title">
+&gt;&gt; LIFEFORM_CATEGORY_OPENED: ABYSS_CORRUPTED_ENTITIES
+&gt;&gt; Rendering case cards...
+      </div>
+
+      <!-- 예시 카드들 (나중에 네 악인 케이스로 교체/추가) -->
+      <div class="subcard" onclick="openLifeform('lifeforms/case_013.html','CASE-013')">
+        <div class="sub-name">CASE-001</div>
+        <div class="sub-meta">CORRUPTED ENTITY // HIGH RISK</div>
+        <div class="sub-desc">Incomplete transformation</div>
+      </div>
+
+      <div class="subcard" onclick="openLifeform('lifeforms/case_027.html','CASE-027')">
+        <div class="sub-name">CASE-002</div>
+        <div class="sub-meta">CORRUPTED ENTITY</div>
+        <div class="sub-desc">Unique case</div>
+      </div>
+
+      <div class="subcard" onclick="openLifeform('lifeforms/case_041.html','CASE-041')">
+        <div class="sub-name">CASE-003</div>
+        <div class="sub-meta">CORRUPTED ENTITY</div>
+        <div class="sub-desc">Fears everything that moves</div>
+      </div>
+    </div>
+
     <!-- 상태바 + 푸터 -->
     <div class="status-bar" id="status-bar"></div>
 
     <div class="footer">
-      ARC SYSTEM // NODE 48755 OVERVIEW v0.1
+      ARC SYSTEM // NODE 48755 OVERVIEW v0.2
       <div class="back-row">
         <span class="back-link" onclick="location.href='../worlds.html'">← Back to World Index</span>
         <span class="back-link" onclick="location.href='../index.html'">← Return to Main System</span>
@@ -274,16 +461,45 @@
   <script>
     const statusBar = document.getElementById('status-bar');
 
-    function openProfile(path, name) {
-      // 상태 메시지 출력
-      const msg = ">> Opening profile: " + name + "...";
+    function pulseStatus(msg) {
       statusBar.textContent = msg;
       statusBar.classList.remove('status-fade');
-      // DOM 강제 리플로우로 애니메이션 리셋
-      void statusBar.offsetWidth;
+      void statusBar.offsetWidth; // reflow
       statusBar.classList.add('status-fade');
+    }
 
-      // 잠깐 보여준 뒤 실제 이동
+    function openProfile(path, name) {
+      const msg = ">> Opening profile: " + name + "...";
+      pulseStatus(msg);
+
+      setTimeout(() => {
+        window.location.href = "../" + path;
+      }, 550);
+    }
+
+    // 생물종 토글
+    function toggleLife(id, label) {
+      const el = document.getElementById(id);
+
+      // 다른 패널이 열려있으면 닫기
+      const panels = ["native", "corrupted"];
+      panels.forEach(pid => {
+        if (pid !== id) document.getElementById(pid).classList.add("hidden");
+      });
+
+      const opening = el.classList.contains("hidden");
+      el.classList.toggle("hidden");
+
+      if (opening) {
+        pulseStatus(">> Category access granted: " + label + " // expanding records...");
+      } else {
+        pulseStatus(">> Category closed: " + label + " // records minimized.");
+      }
+    }
+
+    // 생물 카드 열기 (일단은 페이지로)
+    function openLifeform(path, name) {
+      pulseStatus(">> Loading lifeform record: " + name + "...");
       setTimeout(() => {
         window.location.href = "../" + path;
       }, 550);
